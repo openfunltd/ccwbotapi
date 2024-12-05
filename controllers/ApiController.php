@@ -4,6 +4,22 @@ class ApiController extends MiniEngine_Controller
 {
     public function queryAction()
     {
+        $id = $_GET['id'] ?? null;
+
+        $class = "APICommand_{$id}";
+        if (!class_exists($class)) {
+            return $this->json([
+                'error' => true,
+                'message' => 'Command not found',
+            ]);
+        }
+        $params = $_GET['params'] ?? [];
+
+        return $this->json([
+            'error' => false,
+            'result' => call_user_func([$class, 'run'], $params),
+        ]);
+
     }
 
     public function listAction()

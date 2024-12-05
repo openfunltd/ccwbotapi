@@ -16,4 +16,9 @@ class APICommand
     {
         return static::$params;
     }
+
+    public static function run($params)
+    {
+        return "Not implemented : " . json_encode($params, JSON_UNESCAPED_UNICODE);
+    }
 }

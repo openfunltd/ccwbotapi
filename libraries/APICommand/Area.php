@@ -7,4 +7,9 @@ class APICommand_Area extends APICommand
     public static $params = [
         '選區名稱',
     ];
+
+    public static function run($params)
+    {
+        return 'TODO: 選區查詢';
+    }
 }
