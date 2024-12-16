@@ -2,12 +2,26 @@
 
 class UserAssociate extends MiniEngine_Table
 {
-    public static function getSourceId($source)
+    public static function getSourceMap()
     {
         $map = [
             'google' => 1,
         ];
+        return $map;
+    }
 
+    public static function getSourceName($id)
+    {
+        $map = array_flip(self::getSourceMap());
+        if (isset($map[$id])) {
+            return $map[$id];
+        }
+        throw new Exception('Invalid source id: ' . $id);
+    }
+
+    public static function getSourceId($source)
+    {
+        $map = self::getSourceMap();
         if (isset($map[$source])) {
             return $map[$source];
         }
