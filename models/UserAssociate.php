@@ -2,6 +2,18 @@
 
 class UserAssociate extends MiniEngine_Table
 {
+    public static function getSourceId($source)
+    {
+        $map = [
+            'google' => 1,
+        ];
+
+        if (isset($map[$source])) {
+            return $map[$source];
+        }
+        throw new Exception('Invalid source: ' . $source);
+    }
+
     public function init()
     {
         $this->_columns['associate_id'] = ['type' => 'serial'];
