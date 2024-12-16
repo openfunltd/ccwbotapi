@@ -1,4 +1,13 @@
 <?= $this->partial('common/header') ?>
+<?php if ($this->user) { ?>
+    Hi! <?= $this->escape($this->user->name) ?>
+    (<a href="/user/logout">Logout</a>)
+    <?php if ($this->user->is_admin) { ?>
+        (<a href="/admin">Admin</a>)
+    <?php } ?>
+<?php } else { ?>
+<a href="/user/googlelogin">Login with Google</a>
+<?php } ?>
 <h1>API Test:</h1>
 <form id="form">
     <select id="list" name="id"></select>
