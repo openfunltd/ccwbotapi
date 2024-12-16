@@ -10,6 +10,6 @@ class APICommand_Area extends APICommand
 
     public static function run($params)
     {
-        return 'TODO: 選區查詢';
+        return "TODO: 回傳 {$params[0]} 選區的相關資料";
     }
 }

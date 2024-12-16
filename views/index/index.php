@@ -1,5 +1,5 @@
 <?= $this->partial('common/header', $this) ?>
-<h1>API Test:</h1>
+<h1>標準指令 Test:</h1>
 <form id="form">
     <select id="list" name="id"></select>
     <div id="params"></div>
