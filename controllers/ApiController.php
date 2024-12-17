@@ -6,9 +6,15 @@ class ApiController extends MiniEngine_Controller
     {
         $id = $_GET['id'] ?? null;
         $params = $_GET['params'] ?? [];
+        // get token from Authorization header
+        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            $token = $_SERVER['HTTP_AUTHORIZATION'];
+        } else {
+            $token = '';
+        }
 
         try {
-            $result = APICommand::query($id, $params);
+            $result = APICommand::query($id, $params, $token);
         } catch (Exception $e) {
             return $this->json([
                 'error' => true,
