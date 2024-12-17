@@ -37,5 +37,7 @@ class UserAssociate extends MiniEngine_Table
 
         $this->_indexes['user_id'] = ['columns' => ['user_id']];
         $this->_indexes['source_uid'] = ['columns' => ['source_id', 'uid'], 'unique' => true];
+
+        $this->_relations['user'] = ['rel' => 'has_one', 'type' => 'User', 'foreign_key' => 'user_id'];
     }
 }
