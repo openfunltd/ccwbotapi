@@ -7,6 +7,10 @@ class UserAssociate extends MiniEngine_Table
         $map = [
             'google' => 1,
         ];
+        foreach (APICommand::getSourceConfig() as $source => $config) {
+            $map[$source] = $config->source_id;
+        }
+
         return $map;
     }
 
