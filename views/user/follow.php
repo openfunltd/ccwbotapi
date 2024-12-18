@@ -1,5 +1,4 @@
 <?= $this->partial('common/header', $this) ?>
-<?= $this->partial('admin/header', ['page' => 'follow']) ?>
 <table class="table">
     <thead>
         <tr>
