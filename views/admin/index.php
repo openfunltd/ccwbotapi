@@ -9,6 +9,7 @@ foreach (UserAssociate::search(1) as $assoc) {
 
 ?>
 <?= $this->partial('common/header', $this) ?>
+<?= $this->partial('admin/header', ['page' => 'index']) ?>
 <table class="table">
     <thead>
         <tr>

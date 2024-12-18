@@ -19,5 +19,9 @@ class AdminController extends MiniEngine_Controller
     public function indexAction()
     {
     }
+
+    public function followAction()
+    {
+    }
 }
 
