@@ -2,6 +2,15 @@
 
 class UserFollow extends MiniEngine_Table
 {
+    public static function typeMap()
+    {
+        return [
+            1 => '立委',
+            2 => '法律',
+            3 => '議題',
+        ];
+    }
+
     public function init()
     {
         $this->_columns['follow_id'] = ['type' => 'serial'];

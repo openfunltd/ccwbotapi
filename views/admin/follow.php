@@ -20,16 +20,16 @@ foreach (User::search(['user_id' => array_keys($users)]) as $user) {
 <table class="table">
     <thead>
         <tr>
-            <th>Type</th>
-            <th>key</th>
-            <th>count</th>
-            <th>users</th>
+            <th>追蹤種類</th>
+            <th>追蹤目標</th>
+            <th>人數</th>
+            <th>用戶</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($follows as $id => $follow) { ?>
         <tr>
-            <td><?= explode(':', $id)[0] ?></td>
+            <td><?= UserFollow::typeMap()[explode(':', $id)[0]] ?? '' ?></td>
             <td><?= explode(':', $id, 2)[1] ?></td>
             <td><?= count($follow) ?></td>
             <td>
