@@ -53,4 +53,16 @@ class UserController extends MiniEngine_Controller
         UserSession::logout();
         return $this->redirect('/');
     }
+
+    public function tokenAction()
+    {
+        $token = $_GET['token'] ?? '';
+        $next = $_GET['next'] ?? '/';
+        $user = APICommand::getUserByToken($token, true);
+        if (!$user) {
+            return $this->alert('登入失敗', '/');
+        }
+        MiniEngine::setSession('user_id', $user->user_id);
+        return $this->redirect($next);
+    }
 }
