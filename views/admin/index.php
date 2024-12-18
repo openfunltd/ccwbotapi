@@ -38,4 +38,14 @@ foreach (UserAssociate::search(1) as $assoc) {
         <?php } ?>
     </tbody>
 </table>
+<hr>
+<h1>新增管理員</h1>
+<form method="post" action="/admin/addadmin">
+    <input type="hidden" name="csrf_token" value="<?= $this->csrf_token ?>">
+    <div class="form-group">
+        <label for="user_id">Email</label>
+        <input type="email" class="form-control" id="email" name="email">
+    </div>
+    <button type="submit" class="btn btn-primary">新增</button>
+</form>
 <?= $this->partial('common/footer') ?>
