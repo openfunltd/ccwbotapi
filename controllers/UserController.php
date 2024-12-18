@@ -51,7 +51,11 @@ class UserController extends MiniEngine_Controller
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $obj->access_token));
         $profile = json_decode(curl_exec($curl));
 
-        UserSession::login('google', $email, $profile->names[0]->displayName);
+        try {
+            UserSession::login('google', $email, $profile->names[0]->displayName);
+        } catch (Exception $e) {
+            return $this->alert($e->getMessage(), '/');
+        }
         return $this->redirect('/');
     }
 

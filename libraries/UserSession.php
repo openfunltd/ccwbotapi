@@ -26,7 +26,7 @@ class UserSession
             return;
         }
 
-        throw new Exception('User not found');
+        throw new Exception('找不到使用者');
     }
 
     public static function logout()
