@@ -8,7 +8,7 @@ class APICommand_Area extends APICommand
         '選區名稱',
     ];
 
-    public static function run($params)
+    public static function run($params, $user = null)
     {
         return "TODO: 回傳 {$params[0]} 選區的相關資料";
     }

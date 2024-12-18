@@ -10,7 +10,7 @@ class APICommand_Follow extends APICommand
     ];
     public static $need_login = true;
 
-    public static function run($params)
+    public static function run($params, $user = null)
     {
         $type = $params[0];
         $value = $params[1];

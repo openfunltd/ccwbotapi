@@ -8,7 +8,7 @@ class APICommand_Freetext extends APICommand
         '對話內容',
     ];
 
-    public static function run($params)
+    public static function run($params, $user = null)
     {
         $message = $params[0];
 

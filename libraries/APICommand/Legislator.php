@@ -8,7 +8,7 @@ class APICommand_Legislator extends APICommand
         '立委姓名',
     ];
 
-    public static function run($params)
+    public static function run($params, $user = null)
     {
         return "TODO: 回傳 {$params[0]} 立委的相關資料";
     }

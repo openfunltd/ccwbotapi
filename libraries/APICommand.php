@@ -22,7 +22,7 @@ class APICommand
         return static::$need_login ?? false;
     }
 
-    public static function run($params)
+    public static function run($params, $user = null)
     {
         return "Not implemented : " . json_encode($params, JSON_UNESCAPED_UNICODE);
     }
@@ -104,7 +104,7 @@ class APICommand
             $ret->error = '需要登入';
             return $ret;
         }
-        $result = call_user_func([$class, 'run'], $params);
+        $result = call_user_func([$class, 'run'], $params, $user);
         if (!property_exists($result, 'result')) {
             $ret->result = $result;
         } else {
