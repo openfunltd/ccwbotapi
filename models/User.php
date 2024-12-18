@@ -1,5 +1,27 @@
 <?php
 
+class UserRow extends MiniEngine_Table_Row
+{
+    public function follow($type, $key)
+    {
+        try {
+            UserFollow::insert([
+                'user_id' => $this->user_id,
+                'type' => $type,
+                'follow_key' => $key,
+                'created_at' => time(),
+            ]);
+            return true;
+        } catch (MiniEngine_Table_DuplicateException $e) {
+            return false;
+        }
+    }
+
+    public function unfollow($type, $key)
+    {
+    }
+}
+
 class User extends MiniEngine_Table
 {
     public function init()

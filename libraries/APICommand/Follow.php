@@ -15,6 +15,19 @@ class APICommand_Follow extends APICommand
         $type = $params[0];
         $value = $params[1];
 
-        return "TODO: 追蹤 {$type} {$value}";
+        // TODO: 檢查是否 $value 是合法的（不要亂追蹤不存在的法律或立委）
+        if ($type == '立委') {
+            $ret = $user->follow(1, $value);
+        } elseif ($type == '法律') {
+            $ret = $user->follow(2, $value);
+        } elseif ($type == '議題') {
+            $ret = $user->follow(3, $value);
+        }
+
+        if ($ret) {
+            return "TODO: {$user->name} 成功追蹤 {$type} {$value}";
+        } else {
+            return "TODO: {$user->name} 已經追蹤過 {$type} {$value}";
+        }
     }
 }
