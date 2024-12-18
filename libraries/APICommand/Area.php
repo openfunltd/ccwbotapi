@@ -10,6 +10,21 @@ class APICommand_Area extends APICommand
 
     public static function run($params, $user = null)
     {
-        return "TODO: 回傳 {$params[0]} 選區的相關資料";
+        return [
+            'type' => 'legislator',
+            'data' => [
+                // TODO: 換成真實資料
+                DataBuilder::buildLegislator([
+                    'name' => '王金平',
+                    'party' => '中國國民黨',
+                    'constituency' => '台北市第五選區',
+                ]),
+                DataBuilder::buildLegislator([
+                    'name' => '柯建銘',
+                    'party' => '民主進步黨',
+                    'constituency' => '台北市第六選區',
+                ]),
+            ],
+        ];
     }
 }

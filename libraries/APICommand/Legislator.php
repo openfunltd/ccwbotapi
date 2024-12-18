@@ -10,6 +10,17 @@ class APICommand_Legislator extends APICommand
 
     public static function run($params, $user = null)
     {
-        return "TODO: 回傳 {$params[0]} 立委的相關資料";
+        return [
+            'type' => 'legislator',
+            'data' => [
+                // TODO: 換成真實資料
+                DataBuilder::buildLegislator([
+                    'name' => '王金平',
+                    'party' => '中國國民黨',
+                    'constituency' => '台北市第五選區',
+                ]),
+            ],
+        ];
+
     }
 }

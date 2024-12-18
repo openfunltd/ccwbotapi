@@ -105,7 +105,7 @@ class APICommand
             return $ret;
         }
         $result = call_user_func([$class, 'run'], $params, $user);
-        if (!property_exists($result, 'result')) {
+        if (!is_object($result) or !property_exists($result, 'result')) {
             $ret->result = $result;
         } else {
             foreach ($result as $k => $v) {
