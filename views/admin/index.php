@@ -13,10 +13,10 @@ foreach (UserAssociate::search(1) as $assoc) {
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Associates</th>
-            <th>is_admin</th>
+            <th>使用者代碼</th>
+            <th>顯示名稱</th>
+            <th>關聯</th>
+            <th>是否為管理員</th>
         </tr>
     </thead>
     <tbody>
