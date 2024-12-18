@@ -18,22 +18,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">Home</a>
+          <a class="nav-link" aria-current="page" href="/">首頁</a>
         </li>
         <?php if ($this->user) { ?>
             <li class="nav-item">
                 <span class="nav-link">Hi! <?= $this->escape($this->user->name) ?>
-                    (<a href="/user/logout">Logout</a>)
+                    (<a href="/user/logout">登出</a>)
                 </span>
             </li>
             <?php if ($this->user->is_admin) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin</a>
+                    <a class="nav-link" href="/admin">管理介面</a>
                 </li>
             <?php } ?>
         <?php } else { ?>
             <li>
-                <a class="nav-link" href="/user/googlelogin">Login with Google</a>
+                <a class="nav-link" href="/user/googlelogin">Google登入</a>
             </li>
         <?php } ?>
       </ul>
