@@ -30,6 +30,15 @@ class APICommand_Freetext extends APICommand
             return APICommand::query('Legislator', [$matches['keys'][0]]);
         }
 
+        // 如果有法律名稱的話，就回傳法律的資訊
+        $matches = DataHelper::matchData('laws', $message);
+        if (count($matches['keys']) > 1) {
+            // TODO: 之後支援多個法律
+            return '一次只能查一個法律，請問你要查哪一個？';
+        } elseif (count($matches['keys']) == 1) {
+            return APICommand::query('Law', [$matches['keys'][0]]);
+        }
+
         // 如果有立委名稱，就回傳給立委的資訊
         return 'TODO: 不認得的指令，需要提示教使用者怎麼使用這個功能';
     }
