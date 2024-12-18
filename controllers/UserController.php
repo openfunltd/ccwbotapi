@@ -2,6 +2,13 @@
 
 class UserController extends MiniEngine_Controller
 {
+    public function init()
+    {
+        if ($user_id = MiniEngine::getSession('user_id')) {
+            $this->view->user = User::find($user_id);
+        }
+    }
+
     public function googleloginAction()
     {
         $return_to = 'https://' . $_SERVER['HTTP_HOST'] . '/user/googledone';
@@ -52,6 +59,13 @@ class UserController extends MiniEngine_Controller
     {
         UserSession::logout();
         return $this->redirect('/');
+    }
+
+    public function followAction()
+    {
+        if (!$this->view->user) {
+            return $this->alert('login required', '/');
+        }
     }
 
     public function tokenAction()

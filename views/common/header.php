@@ -22,6 +22,9 @@
         </li>
         <?php if ($this->user) { ?>
             <li class="nav-item">
+                <a class="nav-link" href="/user/follow">我的追蹤</a>
+            </li>
+            <li class="nav-item">
                 <span class="nav-link">Hi! <?= $this->escape($this->user->name) ?>
                     (<a href="/user/logout">登出</a>)
                 </span>
