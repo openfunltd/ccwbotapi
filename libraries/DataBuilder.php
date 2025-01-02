@@ -15,16 +15,16 @@ class DataBuilder
 
     public static function buildLaw($data)
     {
-        $data['actions'] = [];
-        $data['actions'][] = [
+        $data->actions = [];
+        $data->actions[] = [
             'name' => '追蹤法律',
             'method' => 'Follow',
-            'params' => ['法律', $data['law_id']],
+            'params' => ['法律', $data->法律編號],
         ];
-        $data['actions'][] = [
+        $data->actions[] = [
             'name' => '關聯議案',
             'method' => 'LawBill',
-            'params' => [$data['law_id']],
+            'params' => [$data->法律編號],
         ];
         return $data;
     }

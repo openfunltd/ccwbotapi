@@ -36,7 +36,7 @@ class APICommand_Freetext extends APICommand
             // TODO: 之後支援多個法律
             return '一次只能查一個法律，請問你要查哪一個？';
         } elseif (count($matches['keys']) == 1) {
-            return APICommand::query('Law', [$matches['keys'][0]]);
+            return APICommand::query('Law', [$matches['results'][0]['代碼']]);
         }
 
         // 如果有立委名稱，就回傳給立委的資訊

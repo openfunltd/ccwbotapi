@@ -10,16 +10,14 @@ class APICommand_Law extends APICommand
 
     public static function run($params, $user = null)
     {
+        $law_id = $params[0];
+
+        $law = LYAPI::apiQuery("/laws/{$law_id}", "查詢 {$law_id} 法律資訊");
+
         return [
             'type' => 'law',
             'data' => [
-                // TODO: 換成真實資料
-                DataBuilder::buildLaw([
-                    'name' => '兒童及少年性剝削防制條例',
-                    'law_id' => '01234',
-                    'status' => '現行',
-                    'version' => '2024-07-12-修正',
-                ]),
+                DataBuilder::buildLaw($law->data),
             ],
         ];
     }
