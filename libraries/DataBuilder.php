@@ -31,14 +31,14 @@ class DataBuilder
 
     public static function buildBill($data)
     {
-        $data['actions'] = [];
-        $data['actions'][] = [
+        $data->actions = [];
+        $data->actions[] = [
             'name' => '原始資料',
             'method' => '_link',
-            'link' => "https://ppg.ly.gov.tw/ppg/bills/{$data['billNo']}/details",
+            'link' => "https://ppg.ly.gov.tw/ppg/bills/{$data->議案編號}/details",
         ];
-        foreach ($data['laws'] ?? [] as $law_id => $law_name) {
-            $data['actions'][] = [
+        foreach (array_combine($data->法律編號 ?? [], $data->{'法律編號:str'} ?? []) as $law_id => $law_name) {
+            $data->actions[] = [
                 'name' => "查看法律 {$law_name}",
                 'method' => 'Law',
                 'params' => [$law_id],

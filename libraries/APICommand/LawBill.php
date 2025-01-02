@@ -10,21 +10,17 @@ class APICommand_LawBill extends APICommand
 
     public static function run($params, $user = null)
     {
+        $law_id = $params[0];
+
+        $ret = LYAPI::apiQuery("/bills?法律編號={$law_id}&limit=10", "查詢 {$law_id} 議案資訊");
+        $data = [];
+        foreach ($ret->bills as $bill) {
+            unset($bill->相關附件);
+            $data[] = DataBuilder::buildBill($bill);
+        }
         return [
             'type' => 'bill',
-            'data' => [
-                // TODO: 換成真實資料
-                DataBuilder::buildBill([
-                    'name' => '勞動基準法修正草案',
-                    'proposed_by' => '張雅玲',
-                    'bill_id' => '20委11007992',
-                    'billNo' => '202103109320000',
-                    'status' => '交付審查',
-                    'laws' => [
-                        '04502' => '勞動基準法',
-                    ],
-                ]),
-            ],
+            'data' => $data,
         ];
     }
 }
