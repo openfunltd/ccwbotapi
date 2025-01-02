@@ -21,6 +21,11 @@ class DataBuilder
             'method' => 'Follow',
             'params' => ['法律', $data['law_id']],
         ];
+        $data['actions'][] = [
+            'name' => '關聯議案',
+            'method' => 'LawBill',
+            'params' => [$data['law_id']],
+        ];
         return $data;
     }
 
