@@ -10,15 +10,22 @@ class APICommand_Legislator extends APICommand
 
     public static function run($params, $user = null)
     {
+        $name = $params[0];
+
+        $legislator = LYAPI::apiQuery("/legislator/11/{$name}", "查詢 {$name} 立委資訊");
+        if ($legislator->error) {
+            return [
+                'type' => 'text',
+                'data' => [
+                    'text' => "查無此立委",
+                ],
+            ];
+        
+        }
         return [
             'type' => 'legislator',
             'data' => [
-                // TODO: 換成真實資料
-                DataBuilder::buildLegislator([
-                    'name' => '王金平',
-                    'party' => '中國國民黨',
-                    'constituency' => '台北市第五選區',
-                ]),
+                DataBuilder::buildLegislator($legislator),
             ],
         ];
 
