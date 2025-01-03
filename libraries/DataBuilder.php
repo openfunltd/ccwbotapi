@@ -23,6 +23,13 @@ class DataBuilder
             'method' => '_link',
             'link' => $data->IVOD_URL,
         ];
+        if ($data->會議資料 ?? false) {
+            $data->actions[] = [
+                'name' => '會議資料',
+                'method' => 'Meet',
+                'params' => [$data->會議資料->會議代碼],
+            ];
+        }
         return $data;
     }
 
