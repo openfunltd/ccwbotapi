@@ -25,7 +25,7 @@ class APICommand_Legislator extends APICommand
         return [
             'type' => 'legislator',
             'data' => [
-                DataBuilder::buildLegislator($legislator),
+                DataBuilder::buildLegislator($legislator->data),
             ],
         ];
 
