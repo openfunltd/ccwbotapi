@@ -13,12 +13,9 @@ class APICommand_Freetext extends APICommand
         $message = $params[0];
 
         // 如果有行政區名稱，就回傳該行政區的資訊
-        $matches = DataHelper::matchData('towns', $message);
-        if (count($matches['keys']) > 1) {
-            // TODO: 之後支援多個行政區和選區
-            return '一次只能查一個行政區，請問你要查哪一個？';
-        } elseif (count($matches['keys']) == 1) {
-            return APICommand::query('Area', [$matches['keys'][0]]);
+        $matches = DataHelper::matchData('area', $message);
+        if (count($matches['keys'])) {
+            return APICommand::query('Area', [$message]);
         }
 
         // 如果有立委姓名的話，就回傳立委的資訊
