@@ -2,6 +2,30 @@
 
 class DataBuilder
 {
+    public static function buildMeet($data)
+    {
+        $data->actions = [];
+        if ($data->會議資料 ?? false) {
+            $data->actions[] = [
+                'name' => '原始資料',
+                'method' => '_link',
+                'link' => $data->會議資料[0]->ppg_url,
+            ];
+        }
+        return $data;
+    }
+
+    public static function buildIVOD($data)
+    {
+        $data->actions = [];
+        $data->actions[] = [
+            'name' => '原始資料',
+            'method' => '_link',
+            'link' => $data->IVOD_URL,
+        ];
+        return $data;
+    }
+
     public static function buildLegislator($data)
     {
         $data->actions = [];
