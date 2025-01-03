@@ -14,6 +14,14 @@ class APICommand_Zipcode extends APICommand
         $api_url = "/legislators?屆=11";
         $terms = [];
 
+        if (!$matches['results']) {
+            return [
+                'type' => 'text',
+                'data' => [
+                    'text' => "查無此郵遞區號",
+                ],
+            ];
+        }
         foreach ($matches['results'] as $result) {
             $terms[] = "委員姓名=" . urlencode($result['name']);
         }

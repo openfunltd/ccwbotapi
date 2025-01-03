@@ -14,6 +14,15 @@ class APICommand_Area extends APICommand
         $api_url = "/legislators?屆=11";
         $terms = [];
 
+        if (!$matches['results']) {
+            return [
+                'type' => 'text',
+                'data' => [
+                    'text' => "查無此選區",
+                ],
+            ];
+        }
+
         foreach ($matches['results'] as $result) {
             $terms[] = "委員姓名=" . urlencode($result['name']);
         }
