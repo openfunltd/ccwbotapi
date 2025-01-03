@@ -10,21 +10,29 @@ class APICommand_Area extends APICommand
 
     public static function run($params, $user = null)
     {
+        $matches = DataHelper::matchData('area', $params[0]);
+        $api_url = "/legislators?屆=11";
+        $terms = [];
+
+        foreach ($matches['results'] as $result) {
+            $terms[] = "委員姓名=" . urlencode($result['name']);
+        }
+        $legislators = LYAPI::apiQuery($api_url . '&' . implode('&', $terms), "查詢選區立委資訊");
+        if ($legislators->error) {
+            return [
+                'type' => 'text',
+                'data' => [
+                    'text' => "查無此立委",
+                ],
+            ];
+        }
+        $data = [];
+        foreach ($legislators->legislators as $legislator) {
+            $data[] = DataBuilder::buildLegislator($legislator);
+        }
         return [
             'type' => 'legislator',
-            'data' => [
-                // TODO: 換成真實資料
-                DataBuilder::buildLegislator([
-                    'name' => '王金平',
-                    'party' => '中國國民黨',
-                    'constituency' => '台北市第五選區',
-                ]),
-                DataBuilder::buildLegislator([
-                    'name' => '柯建銘',
-                    'party' => '民主進步黨',
-                    'constituency' => '台北市第六選區',
-                ]),
-            ],
+            'data' => $data,
         ];
     }
 }
