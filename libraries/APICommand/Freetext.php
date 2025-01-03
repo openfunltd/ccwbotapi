@@ -18,6 +18,14 @@ class APICommand_Freetext extends APICommand
             return APICommand::query('Area', [$message]);
         }
 
+        // 如果有三碼郵遞區號，就回傳該行政區的資訊
+        if (preg_match('#\d{3}#', $message, $matches)) {
+            $zipcode = $matches[0];
+            if ($matches = DataHelper::matchData('zipcode', $zipcode)) {
+                return APICommand::query('Zipcode', [$zipcode]);
+            }
+        }
+
         // 如果有立委姓名的話，就回傳立委的資訊
         $matches = DataHelper::matchData('legislators', $message);
         if (count($matches['keys']) > 1) {
