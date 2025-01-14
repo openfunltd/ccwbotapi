@@ -36,6 +36,11 @@ class DataBuilder
     public static function buildLegislator($data, $user = null)
     {
         $data->actions = [];
+        $data->actions[] = [
+            'name' => '最近發言',
+            'method' => 'LegislatorIVOD',
+            'params' => [$data->委員姓名],
+        ];
         if ($user and $user->isFollow(1, $data->委員姓名)) {
             $data->actions[] = [
                 'name' => '取消追蹤立委',
