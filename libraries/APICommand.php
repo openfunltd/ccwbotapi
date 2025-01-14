@@ -104,7 +104,7 @@ class APICommand
             $ret->error = '需要登入';
             return $ret;
         }
-        $result = call_user_func([$class, 'run'], $params, $user);
+        $result = call_user_func([$class, 'run'], $params, $user, $token);
         if (!is_object($result) or !property_exists($result, 'result')) {
             $ret->result = $result;
         } else {

@@ -8,14 +8,14 @@ class APICommand_Freetext extends APICommand
         '對話內容',
     ];
 
-    public static function run($params, $user = null)
+    public static function run($params, $user = null, $token = null)
     {
         $message = $params[0];
 
         if (strpos($message, '!') === 0) {
             list(, $method, $args) = explode('!', $message, 3);
             $args = array_map('rawurldecode', explode('&', $args));
-            return APICommand::query($method, $args);
+            return APICommand::query($method, $args, $token);
         }
 
         // 如果有行政區名稱，就回傳該行政區的資訊
