@@ -23,11 +23,14 @@ class APICommand_TodayMeet extends APICommand
                     'text' => "查無此會議",
                 ],
             ];
-        
+        }
+        $meets = [];
+        foreach ($ret->meets as $meet) {
+            $meets[] = DataBuilder::buildMeet($meet, $user);
         }
         return [
             'type' => 'meet',
-            'data' => array_map(['DataBuilder', 'buildMeet'], $ret->meets),
+            'data' => $meets,
         ];
     }
 }

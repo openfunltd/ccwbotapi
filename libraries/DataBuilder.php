@@ -2,7 +2,7 @@
 
 class DataBuilder
 {
-    public static function buildMeet($data)
+    public static function buildMeet($data, $user = null)
     {
         $data->actions = [];
         if ($data->會議資料 ?? false) {
@@ -15,7 +15,7 @@ class DataBuilder
         return $data;
     }
 
-    public static function buildIVOD($data)
+    public static function buildIVOD($data, $user = null)
     {
         $data->actions = [];
         $data->actions[] = [
@@ -33,25 +33,41 @@ class DataBuilder
         return $data;
     }
 
-    public static function buildLegislator($data)
+    public static function buildLegislator($data, $user = null)
     {
         $data->actions = [];
-        $data->actions[] = [
-            'name' => '追蹤立委',
-            'method' => 'Follow',
-            'params' => ['立委', $data->立委姓名],
-        ];
+        if ($user and $user->isFollow(1, $data->委員姓名)) {
+            $data->actions[] = [
+                'name' => '取消追蹤立委',
+                'method' => 'Unfollow',
+                'params' => ['立委', $data->委員姓名],
+            ];
+        } else {
+            $data->actions[] = [
+                'name' => '追蹤立委',
+                'method' => 'Follow',
+                'params' => ['立委', $data->委員姓名],
+            ];
+        }   
         return $data;
     }
 
-    public static function buildLaw($data)
+    public static function buildLaw($data, $user = null)
     {
         $data->actions = [];
-        $data->actions[] = [
-            'name' => '追蹤法律',
-            'method' => 'Follow',
-            'params' => ['法律', $data->法律編號],
-        ];
+        if ($user and $user->isFollow(2, $data->法律編號)) {
+            $data->actions[] = [
+                'name' => '取消追蹤法律',
+                'method' => 'Unfollow',
+                'params' => ['法律', $data->法律編號],
+            ];
+        } else {
+            $data->actions[] = [
+                'name' => '追蹤法律',
+                'method' => 'Follow',
+                'params' => ['法律', $data->法律編號],
+            ];
+        }
         $data->actions[] = [
             'name' => '關聯議案',
             'method' => 'LawBill',
@@ -60,7 +76,7 @@ class DataBuilder
         return $data;
     }
 
-    public static function buildBill($data)
+    public static function buildBill($data, $user = null)
     {
         $data->actions = [];
         $data->actions[] = [

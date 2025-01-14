@@ -21,14 +21,14 @@ class APICommand_Freetext extends APICommand
         // 如果有行政區名稱，就回傳該行政區的資訊
         $matches = DataHelper::matchData('area', $message);
         if (count($matches['keys'])) {
-            return APICommand::query('Area', [$message]);
+            return APICommand::query('Area', [$message], $token);
         }
 
         // 如果有三碼郵遞區號，就回傳該行政區的資訊
         if (preg_match('#\d{3}#', $message, $matches)) {
             $zipcode = $matches[0];
             if ($matches = DataHelper::matchData('zipcode', $zipcode)) {
-                return APICommand::query('Zipcode', [$zipcode]);
+                return APICommand::query('Zipcode', [$zipcode], $token);
             }
         }
 
@@ -38,7 +38,7 @@ class APICommand_Freetext extends APICommand
             // TODO: 之後支援多個立委
             return '一次只能查一個立委，請問你要查哪一個？';
         } elseif (count($matches['keys']) == 1) {
-            return APICommand::query('Legislator', [$matches['keys'][0]]);
+            return APICommand::query('Legislator', [$matches['keys'][0]], $token);
         }
 
         // 如果有法律名稱的話，就回傳法律的資訊
@@ -47,7 +47,7 @@ class APICommand_Freetext extends APICommand
             // TODO: 之後支援多個法律
             return '一次只能查一個法律，請問你要查哪一個？';
         } elseif (count($matches['keys']) == 1) {
-            return APICommand::query('Law', [$matches['results'][0]['代碼']]);
+            return APICommand::query('Law', [$matches['results'][0]['代碼']], $token);
         }
 
         // 如果有立委名稱，就回傳給立委的資訊

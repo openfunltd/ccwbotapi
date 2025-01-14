@@ -17,7 +17,7 @@ class APICommand_Law extends APICommand
         return [
             'type' => 'law',
             'data' => [
-                DataBuilder::buildLaw($law->data),
+                DataBuilder::buildLaw($law->data, $user),
             ],
         ];
     }

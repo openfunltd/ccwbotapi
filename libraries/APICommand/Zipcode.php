@@ -36,7 +36,7 @@ class APICommand_Zipcode extends APICommand
         }
         $data = [];
         foreach ($legislators->legislators as $legislator) {
-            $data[] = DataBuilder::buildLegislator($legislator);
+            $data[] = DataBuilder::buildLegislator($legislator, $user);
         }
         return [
             'type' => 'legislator',

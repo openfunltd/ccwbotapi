@@ -23,7 +23,7 @@ class APICommand_Meet extends APICommand
         return [
             'type' => 'meet',
             'data' => [
-                DataBuilder::buildMeet($ret->data),
+                DataBuilder::buildMeet($ret->data, $user),
             ],
         ];
     }

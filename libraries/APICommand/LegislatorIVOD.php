@@ -21,10 +21,14 @@ class APICommand_LegislatorIVOD extends APICommand
                 ],
             ];
         }
+        $ivods = [];
+        foreach ($ret->ivods as $ivod) {
+            $ivods[] = DataBuilder::buildIVOD($ivod, $user);
+        }
 
         return [
             'type' => 'ivod',
-            'data' => array_map(['DataBuilder', 'buildIVOD'], $ret->ivods),
+            'data' => $ivods,
         ];
 
     }

@@ -16,7 +16,7 @@ class APICommand_LawBill extends APICommand
         $data = [];
         foreach ($ret->bills as $bill) {
             unset($bill->相關附件);
-            $data[] = DataBuilder::buildBill($bill);
+            $data[] = DataBuilder::buildBill($bill, $user);
         }
         return [
             'type' => 'bill',
