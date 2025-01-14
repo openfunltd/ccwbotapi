@@ -12,6 +12,12 @@ class APICommand_Freetext extends APICommand
     {
         $message = $params[0];
 
+        if (strpos($message, '!') === 0) {
+            list(, $method, $args) = explode('!', $message, 3);
+            $args = array_map('rawurldecode', explode('&', $args));
+            return APICommand::query($method, $args);
+        }
+
         // 如果有行政區名稱，就回傳該行政區的資訊
         $matches = DataHelper::matchData('area', $message);
         if (count($matches['keys'])) {
