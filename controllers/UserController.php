@@ -7,6 +7,7 @@ class UserController extends MiniEngine_Controller
         if ($user_id = MiniEngine::getSession('user_id')) {
             $this->view->user = User::find($user_id);
         }
+        $this->init_csrf();
     }
 
     public function googleloginAction()
@@ -69,6 +70,13 @@ class UserController extends MiniEngine_Controller
     {
         if (!$this->view->user) {
             return $this->alert('login required', '/');
+        }
+        if ($_POST) {
+            if ($_POST['csrf_token'] != $this->view->csrf_token) {
+                return $this->alert('csrf token error', '/');
+            }
+            $this->view->user->unfollow($_GET['type'], $_GET['follow_key']);
+            return $this->redirect('/user/follow');
         }
     }
 
