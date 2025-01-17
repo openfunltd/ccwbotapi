@@ -2,14 +2,36 @@
 
 class DataBuilder
 {
-    public static function buildMeet($data, $user = null)
+    public static function buildMeet($origin_data, $user = null)
     {
+        $data = new StdClass;
+        $data->會議名稱 = $origin_data->name;
+        $data->會議代碼 = $origin_data->會議代碼;
+        $data->日期 = $origin_data->日期;
+        $data->會議種類 = $origin_data->會議種類;
+        $data->會議事由 = $origin_data->會議資料[0]->會議事由 ?? '';
+        $data->委員會 = $origin_data->{'委員會代號:str'} ?? [];
+        $data->相關法律 = [];
+        if ($data->會議種類 != '院會') {
+            foreach ($origin_data->議事網資料 ?? [] as $record) {
+                foreach ($record->關係文書->議案 ?? [] as $bill) {
+                    foreach ($bill->{'法律編號'} ?? [] as $idx => $law_id) {
+                        $data->相關法律[] = [
+                            $law_id,
+                            $bill->{'法律編號:str'}[$idx],
+                        ];
+                    }
+                }
+            }
+            $data->相關法律 = array_values(array_unique($data->相關法律));
+        }
+
         $data->actions = [];
-        if ($data->會議資料 ?? false) {
+        if ($origin_data->會議資料[0]->ppg_url ?? false) {
             $data->actions[] = [
                 'name' => '原始資料',
                 'method' => '_link',
-                'link' => $data->會議資料[0]->ppg_url,
+                'link' => $origin_data->會議資料[0]->ppg_url,
             ];
         }
         return $data;
